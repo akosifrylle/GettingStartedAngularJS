@@ -8,14 +8,17 @@
     
 </head>
 <body>
-<div class="container " role="main">
+<div class="container " role="main" ng-init="names=['Goku', 'Vegeta', 'Beerus', 'Whis']">
     <div class="jumbotron">Welcome to AngularJs {{ fname + ' wow ' + lname }}</div>
 
     <div>
         <input type="text" ng-model="fname"/>
-        <input type="text" ng-model="lname" />
-
+        <input type="text" ng-model="lname"/>
     </div>
+
+    <ul>
+        <li ng-repeat="name in names | filter:fname">{{ name }}</li>
+    </ul>
 </div>
     @Scripts.Render("~/bundles/angular")
 </body>
