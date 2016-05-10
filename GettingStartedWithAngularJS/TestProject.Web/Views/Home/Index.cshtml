@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html ng-app>
+<head>
+    <title></title>
+
+    @Styles.Render(
+    "~/Content/bootstrap")
+    
+</head>
+<body>
+<div class="container " role="main">
+    <div class="jumbotron">Welcome to AngularJs {{ fname + ' wow ' + lname }}</div>
+
+    <div>
+        <input type="text" ng-model="fname"/>
+        <input type="text" ng-model="lname" />
+
+    </div>
+</div>
+    @Scripts.Render("~/bundles/angular")
+</body>
+</html>
+
