@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app>
+<html ng-app="myModule">
 <head>
     <title></title>
 
@@ -8,19 +8,20 @@
     
 </head>
 <body>
-<div class="container " role="main" ng-init="names=['Goku', 'Vegeta', 'Beerus', 'Whis']">
-    <div class="jumbotron">Welcome to AngularJs {{ fname + ' wow ' + lname }}</div>
+<div class="container " role="main" ng-controller="myController">
+    <div class="jumbotron">Welcome to AngularJs</div>
 
     <div>
-        <input type="text" ng-model="fname"/>
-        <input type="text" ng-model="lname"/>
+        <input type="text" ng-model="employeeFilter"/>
     </div>
+    
 
     <ul>
-        <li ng-repeat="name in names | filter:fname">{{ name }}</li>
+        <li ng-repeat="employee in employees | filter: employeeFilter">{{ employee.FirstName + ' ' + employee.LastName }}</li>
     </ul>
 </div>
-    @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/angular")
+        <script src="~/Scripts/app.js"></script>
 </body>
 </html>
 
