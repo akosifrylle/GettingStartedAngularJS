@@ -5,19 +5,53 @@
 
     @Styles.Render(
     "~/Content/bootstrap")
-    
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
 <div class="container " role="main" ng-controller="myController">
     <div class="jumbotron">Welcome to AngularJs</div>
 
     <div>
-        <input type="text" ng-model="employeeFilter"/>
+        Filter by <input type="text" placeholder="Search Employee" ng-model="employeeFilter"/>
     </div>
-    
+
 
     <ul>
-        <li ng-repeat="employee in employees | filter: employeeFilter">{{ employee.FirstName + ' ' + employee.LastName }}</li>
+        <table>
+            <thead>
+            <tr>
+                <th ng-click="ChangeSort('FirstName')">
+                    <div ng-class="GetSortClass('FirstName')"></div>Name
+                </th>
+                <th>
+                    Projects
+                </th>
+                <th ng-click="ChangeSort('Salary')">
+                    <div ng-class="GetSortClass('Salary')"></div>Salary>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="employee in employees | orderBy: sortColumn">
+                <td>{{ employee.FirstName }}</td>
+                <td><span ng-repeat="project in employee.Projects">{{project.Name}} </span></td>
+                <td>{{ employee.Salary}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <input type="button" ng-click="ChangeSort()"/>
+        <li ng-repeat="employee in employees | filter: employeeFilter | limitTo: 1">
+            {{ employee.FirstName + ' ' + employee.LastName }} Salary: {{ employee.Salary | currency: 'Php ' }}
+            <ul ng-repeat="project in employee.Projects">
+                Projects
+                <li> {{ project.Name }}
+                    Language: {{ project.Language }}
+                </li>
+            </ul>
+            <input type="text" ng-model="increase"/>
+            <input type="button" value="Increase Salary" ng-click="IncreaseSalary(employee, increase)"/>
+        </li>
     </ul>
 </div>
         @Scripts.Render("~/bundles/angular")
